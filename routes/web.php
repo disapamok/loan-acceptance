@@ -28,6 +28,7 @@ Route::group(['prefix' => 'loans', 'middleware' => 'auth', 'as' => 'loan.'], fun
 
 Route::group(['prefix' => 'customers', 'middleware' => 'auth', 'as' => 'customer.'], function () {
     Route::get('/', [CustomerController::class, 'index'])->name('index');
+    Route::post('/fetch', [CustomerController::class, 'fetch'])->name('fetch');
 });
 
 Auth::routes();
