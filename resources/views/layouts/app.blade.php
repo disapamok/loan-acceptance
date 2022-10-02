@@ -88,7 +88,8 @@
                         <div class="menu">
                             <ul>
                                 <li>
-                                    <a href="{{ route('loan.index') }}" class="active">Loans</a>
+                                    <a href="{{ route('loan.index') }}"
+                                        class="{{ request()->url() == route('loan.index') ? 'active' : '' }}">Loans</a>
                                 </li>
                                 <li>
                                     <a href="" class="active">Customers</a>

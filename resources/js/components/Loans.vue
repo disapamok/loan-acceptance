@@ -13,17 +13,17 @@
                     <thead>
                         <tr>
                             <th>Customer Name</th>
-                            <th>Loan Amount</th>
-                            <th>Loan Duration</th>
-                            <th>Bank File</th>
+                            <th class="text-right">Loan Amount</th>
+                            <th class="text-right">Loan Duration</th>
+                            <th class="text-right">Bank File</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Sahan Dissanayake</td>
-                            <td>250,000 LKR</td>
-                            <td>12 Months</td>
-                            <td><a>Download</a></td>
+                        <tr v-for="loan in loans" :key="loan.id">
+                            <td>{{loan.customer.name}}</td>
+                            <td class="text-right">{{loan.pretty_amount}} LKR</td>
+                            <td class="text-right">{{loan.duration}} Months</td>
+                            <td class="text-right"><a :href="'/loans/download/'+loan.id">Download</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -41,7 +41,7 @@
         },
         data(){
             return {
-
+                loans : []
             }
         },
         mounted() {
@@ -50,7 +50,8 @@
         methods : {
             getLoans : function (){
                 axios.post('/loans/fetch').then(response => {
-
+                    this.loans = response.data.data.loans.data;
+                    console.log(this.loans)
                 }).catch(function (){
                     alert('error');
                 });

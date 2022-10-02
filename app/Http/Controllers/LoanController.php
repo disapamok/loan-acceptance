@@ -19,7 +19,7 @@ class LoanController extends BaseAPIController
 
     public function fetch()
     {
-        $loans = Loan::paginate(12);
+        $loans = Loan::with('customer')->paginate(12);
 
         return $this->success([
             'loans' => $loans
@@ -57,5 +57,20 @@ class LoanController extends BaseAPIController
         }
 
         return $this->fail([], 'Failed to add the loan.');
+    }
+
+    public function downloadFile(Loan $loan, Request $request)
+    {
+        $fileName = $loan->bank_file;
+
+        if ($fileName != '') {
+            $filePath = storage_path('app/public/bank-files/' . $fileName);
+            $extension = explode('.', $fileName)[1];
+            $downloadFileName = 'LOAN0' . $loan->id . '.' . $extension;
+
+            return response()->download($filePath, $downloadFileName);
+        } else {
+            abort(404);
+        }
     }
 }

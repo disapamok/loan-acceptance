@@ -22,6 +22,7 @@ Route::group(['prefix' => 'loans', 'middleware' => 'auth', 'as' => 'loan.'], fun
     Route::get('/', [LoanController::class, 'index'])->name('index');
     Route::post('/fetch', [LoanController::class, 'fetch'])->name('fetch');
     Route::post('/add', [LoanController::class, 'addLoan'])->name('add');
+    Route::get('/download/{loan}', [LoanController::class, 'downloadFile'])->name('download');
 });
 
 Auth::routes();
