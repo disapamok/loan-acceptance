@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddLoanRequest;
 use App\Models\Loan;
 use Illuminate\Http\Request;
 
@@ -19,5 +20,10 @@ class LoanController extends BaseAPIController
         return $this->success([
             'loans' => $loans
         ]);
+    }
+
+    public function addLoan(AddLoanRequest $request)
+    {
+        # code...
     }
 }

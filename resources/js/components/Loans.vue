@@ -8,6 +8,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
+                <button class="btn btn-primary mb-1 float-right" data-toggle="modal" data-target="#addLoan">Add Loan</button>
                 <table class="table">
                     <thead>
                         <tr>
@@ -28,11 +29,21 @@
                 </table>
             </div>
         </div>
+        <AddLoan/>
     </div>
 </template>
 
 <script>
+    import AddLoan from './Modals/addLoan.vue';
     export default {
+        components : {
+            AddLoan
+        },
+        data(){
+            return {
+
+            }
+        },
         mounted() {
             this.getLoans();
         },
@@ -43,6 +54,9 @@
                 }).catch(function (){
                     alert('error');
                 });
+            },
+            addLoan : function(){
+                this.addLoanModal.show = true;
             }
         }
     }
