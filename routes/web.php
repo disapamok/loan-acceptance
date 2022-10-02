@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::group(['prefix' => 'loans', 'middleware' => 'auth', 'as' => 'loan.'], function () {
+    Route::get('/', [LoanController::class, 'index'])->name('index');
+    Route::post('/fetch', [LoanController::class, 'fetch'])->name('fetch');
 });
 
 Auth::routes();
