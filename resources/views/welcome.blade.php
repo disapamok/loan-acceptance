@@ -74,7 +74,7 @@
             </div>
             <div class="links">
                 <a href="{{ route('loan.index') }}">Browse Application</a>
-                <a href="https://laracasts.com">API Documentation</a>
+                <a href="{{ route('home.documentation') }}">API Documentation</a>
                 <a href="https://laracasts.com">Postman Endpoints</a>
                 <a href="https://laracasts.com">Testing Instructions</a>
             </div>

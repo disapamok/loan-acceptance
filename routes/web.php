@@ -1,23 +1,19 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DocumentationController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoanController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+/*
+* API Documentation
+*/
+Route::get('api-documentation', [DocumentationController::class, 'documentation'])->name('home.documentation');
 
 Route::group(['prefix' => 'loans', 'middleware' => 'auth', 'as' => 'loan.'], function () {
     Route::get('/', [LoanController::class, 'index'])->name('index');
