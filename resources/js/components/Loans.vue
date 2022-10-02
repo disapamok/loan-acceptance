@@ -29,7 +29,7 @@
                 </table>
             </div>
         </div>
-        <AddLoan/>
+        <AddLoan v-on:loanAdded="getLoans()"/>
     </div>
 </template>
 

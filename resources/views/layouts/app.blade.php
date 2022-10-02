@@ -92,7 +92,8 @@
                                         class="{{ request()->url() == route('loan.index') ? 'active' : '' }}">Loans</a>
                                 </li>
                                 <li>
-                                    <a href="" class="active">Customers</a>
+                                    <a href="{{ route('customer.index') }}"
+                                        class="{{ request()->url() == route('customer.index') ? 'active' : '' }}">Customers</a>
                                 </li>
                             </ul>
                         </div>
