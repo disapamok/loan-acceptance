@@ -27,7 +27,7 @@ class AddLoanRequest extends FormRequest
             'customer_name' => 'required',
             'duration' => 'required|numeric|between:0,120',
             'amount' => 'required|numeric|between:0,9999999999.99',
-            'bankFile' => 'required|file'
+            'bankFile' => 'required|file|mimes:pdf,csv,txt'
         ];
     }
 }

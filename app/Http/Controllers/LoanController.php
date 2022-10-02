@@ -24,6 +24,7 @@ class LoanController extends BaseAPIController
 
     public function addLoan(AddLoanRequest $request)
     {
-        # code...
+        // The request is validated.
+
     }
 }

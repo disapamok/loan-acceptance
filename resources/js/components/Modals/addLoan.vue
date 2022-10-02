@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group">
                         <label>Bank File</label>
-                        <input type="file"  class="form-control" />
+                        <input type="file" id="files" ref="bankFile" v-on:change="selectUploadedFile()" />
                         <p v-if="addLoanErrors.bankFile != null" class="text-danger">{{addLoanErrors.bankFile[0]}}</p>
                     </div>
                 </div>
@@ -45,13 +45,13 @@ export default {
     data() {
         return {
             addLoan: {
-                customer_name: null,
+                customer_name: '',
                 amount: null,
                 duration: null,
                 bankFile: null
             },
             addLoanErrors:{
-                customer_name: null,
+                customer_name: '',
                 amount: null,
                 duration: null,
                 bankFile: null
@@ -60,27 +60,49 @@ export default {
     },
     methods : {
         createLoan : function (){
-            axios.put('/loans/add',this.addLoan).then((response) => {
+
+            let formData = new FormData();
+            formData.append('customer_name',this.addLoan.customer_name);
+            formData.append('amount',this.addLoan.amount);
+            formData.append('duration',this.addLoan.duration);
+            formData.append('bankFile',this.addLoan.bankFile);
+
+            axios.post('/loans/add',formData,{
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then((response) => {
                 //this.showAlert(response.data.message);
                 $('#addLoan').modal('hide');
                 this.$emit('loanAdded',response.data.data.theLoan);
             }).catch((error) => {
                 this.addLoanErrors = {
-                    name: null,
+                    customer_name: null,
                     amount: null,
                     duration: null,
                     bankFile: null
                 }
                 this.addLoanErrors = error.response.data.errors;
+
+                console.log(this.addLoanErrors);
             });
         },
         hideModal : function (){
             this.addLoan = {
-                name: null,
+                customer_name: '',
                 amount: null,
                 duration: null,
                 bankFile: null
             }
+            this.addLoanErrors = {
+                customer_name: '',
+                amount: null,
+                duration: null,
+                bankFile: null
+            }
+        },
+        selectUploadedFile : function (){
+            this.addLoan.bankFile = this.$refs.bankFile.files[0];
         }
     },
     mounted (){
