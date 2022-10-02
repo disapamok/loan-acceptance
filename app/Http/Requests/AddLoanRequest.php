@@ -24,10 +24,10 @@ class AddLoanRequest extends FormRequest
     public function rules()
     {
         return [
-            'customer_name' => 'required',
+            'customer_name' => 'required|unique:customers,name',
             'duration' => 'required|numeric|between:0,120',
             'amount' => 'required|numeric|between:0,9999999999.99',
-            'bankFile' => 'required|file|mimes:pdf,csv,txt'
+            'bankFile' => 'required|mimes:pdf,csv,txt'
         ];
     }
 }
