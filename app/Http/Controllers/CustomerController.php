@@ -23,7 +23,7 @@ class CustomerController extends BaseAPIController
 
     public function get($customerID)
     {
-        $customer = Customer::where('id', $customerID)->with('loans')->first();
+        $customer = Customer::where('id', $customerID)->with('loans', 'loans.schedule')->first();
 
         return $this->success([
             'customer' => $customer

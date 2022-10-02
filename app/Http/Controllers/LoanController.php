@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AddLoanRequest;
 use App\Models\Customer;
 use App\Models\Loan;
+use App\Models\PaymentSchedule;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +21,7 @@ class LoanController extends BaseAPIController
 
     public function fetch()
     {
-        $loans = Loan::with('customer')->paginate(12);
+        $loans = Loan::orderBy('created_at', 'DESC')->with('customer')->paginate(12);
 
         return $this->success([
             'loans' => $loans
@@ -42,12 +44,22 @@ class LoanController extends BaseAPIController
             $customer->save();
 
             // Create loan
-            $customer->loans()->save(new Loan([
+            $loan = $customer->loans()->save(new Loan([
                 'amount' => $request->amount,
                 'duration' => $request->duration,
                 'bank_file' => $randomName,
                 'created_by' => auth()->id()
             ]));
+
+            $monthlyAmount = number_format((float) ($request->amount / $request->duration), 2, '.', '');
+
+            for ($month = 1; $month <= $request->duration; $month++) {
+                $instalment = new PaymentSchedule();
+                $instalment->loan_id = $loan->id;
+                $instalment->amount = $monthlyAmount;
+                $instalment->due_date = Carbon::now()->addMonths($month)->format('Y-m-d');
+                $instalment->save();
+            }
 
             DB::commit();
 

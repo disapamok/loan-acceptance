@@ -20,7 +20,7 @@ class CreatePaymentScheduleTable extends Migration
 
             $table->double('amount');
             $table->date('due_date')->nullable();
-            $table->dateTime('paid_at');
+            $table->dateTime('paid_at')->nullable();
 
             $table->timestamps();
         });

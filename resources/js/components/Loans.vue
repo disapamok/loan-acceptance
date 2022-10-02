@@ -12,6 +12,7 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th>Loan Number</th>
                             <th>Customer Name</th>
                             <th class="text-right">Loan Amount</th>
                             <th class="text-right">Loan Duration</th>
@@ -20,6 +21,7 @@
                     </thead>
                     <tbody>
                         <tr v-for="loan in loans" :key="loan.id">
+                            <td>LOAN0{{loan.id}}</td>
                             <td>{{loan.customer.name}}</td>
                             <td class="text-right">{{loan.pretty_amount}} LKR</td>
                             <td class="text-right">{{loan.duration}} Months</td>

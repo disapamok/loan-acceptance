@@ -23,7 +23,7 @@
                             </div>
                         </div>
                     </div>
-                    <h5>Ongoing Loans</h5>
+                    <h6><b>Ongoing Loans</b></h6>
                     <table class="table">
                         <thead>
                             <tr>
@@ -42,6 +42,24 @@
                             </tr>
                         </tbody>
                     </table>
+
+                    <div v-for="loan in customerData.loans" :key="'schedule'+loan.id">
+                        <h6><b>Re-payment schedule for: LOAN0{{loan.id}} </b></h6>
+                        <table class="table">
+                            <tr>
+                                <th>Instalment Number</th>
+                                <th>Month</th>
+                                <th class="text-right">Amount</th>
+                                <th class="text-right">Status</th>
+                            </tr>
+                            <tr v-for="schedule in loan.schedule" :key="'SCH'+schedule.id">
+                                <td>INST0{{schedule.id}}</td>
+                                <td>{{schedule.due_date}}</td>
+                                <td class="text-right">{{schedule.pretty_amount}} LKR</td>
+                                <td class="text-right">{{schedule.paid_at == null ? 'Not Settled' : 'Settled'}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

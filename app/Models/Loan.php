@@ -18,4 +18,9 @@ class Loan extends Model
     {
         return number_format($this->amount, 2);
     }
+
+    public function schedule()
+    {
+        return $this->hasMany(PaymentSchedule::class, 'loan_id');
+    }
 }
