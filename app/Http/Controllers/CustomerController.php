@@ -20,4 +20,13 @@ class CustomerController extends BaseAPIController
             'customers' => $customers
         ]);
     }
+
+    public function get($customerID)
+    {
+        $customer = Customer::where('id', $customerID)->with('loans')->first();
+
+        return $this->success([
+            'customer' => $customer
+        ]);
+    }
 }

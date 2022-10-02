@@ -21,21 +21,23 @@
                             <td>{{customer.name}}</td>
                             <td class="text-right">{{customer.total_due}} LKR</td>
                             <td class="text-right">
-                                <button class="btn btn-primary btn-sm">Show Details</button>
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#customerDetails" v-on:click="openDetails(customer.id)">Show Details</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <viewCustomer ref="viewCustomer"/>
     </div>
 </template>
 
 
 <script>
+    import viewCustomer from './Modals/viewCustomer.vue';
     export default {
         components : {
-
+            viewCustomer
         },
         data(){
             return {
@@ -43,16 +45,19 @@
             }
         },
         mounted() {
-            this.getLoans();
+            this.getCustomers();
         },
         methods : {
-            getLoans : function (){
+            getCustomers : function (){
                 axios.post('/customers/fetch').then(response => {
                     this.customers = response.data.data.customers.data;
                 }).catch(function (){
                     alert('error');
                 });
             },
+            openDetails : function(customerID){
+                this.$refs.viewCustomer.modelOpened(customerID);
+            }
         }
     }
 </script>
