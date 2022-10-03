@@ -20,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="loan in loans" :key="loan.id">
+                        <tr v-for="loan in loans.data" :key="loan.id">
                             <td>LOAN0{{loan.id}}</td>
                             <td>{{loan.customer.name}}</td>
                             <td class="text-right">{{loan.pretty_amount}} LKR</td>
@@ -29,6 +29,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <pagination class="float-right" :data="loans" @pagination-change-page="getLoans"></pagination>
             </div>
         </div>
         <AddLoan v-on:loanAdded="getLoans()"/>
@@ -43,17 +44,16 @@
         },
         data(){
             return {
-                loans : []
+                loans : {}
             }
         },
         mounted() {
             this.getLoans();
         },
         methods : {
-            getLoans : function (){
-                axios.post('/loans/fetch').then(response => {
-                    this.loans = response.data.data.loans.data;
-                    console.log(this.loans)
+            getLoans : function (page = 1){
+                axios.post('/loans/fetch?page=' + page).then(response => {
+                    this.loans = response.data.data.loans;
                 }).catch(function (){
                     alert('error');
                 });

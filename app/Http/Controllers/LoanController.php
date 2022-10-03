@@ -21,7 +21,7 @@ class LoanController extends BaseAPIController
 
     public function fetch()
     {
-        $loans = Loan::orderBy('created_at', 'DESC')->with('customer')->paginate(12);
+        $loans = Loan::orderBy('created_at', 'DESC')->with('customer')->paginate(10);
 
         return $this->success([
             'loans' => $loans
