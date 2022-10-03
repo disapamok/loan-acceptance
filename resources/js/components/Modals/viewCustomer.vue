@@ -59,6 +59,7 @@
                                 <td class="text-right">{{schedule.paid_at == null ? 'Not Settled' : 'Settled'}}</td>
                             </tr>
                         </table>
+
                     </div>
                 </div>
                 <div class="modal-footer">

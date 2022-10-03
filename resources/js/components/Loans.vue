@@ -9,26 +9,28 @@
         <div class="row">
             <div class="col-lg-12">
                 <button class="btn btn-primary mb-1 float-right" data-toggle="modal" data-target="#addLoan">Add Loan</button>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Loan Number</th>
-                            <th>Customer Name</th>
-                            <th class="text-right">Loan Amount</th>
-                            <th class="text-right">Loan Duration</th>
-                            <th class="text-right">Bank File</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="loan in loans.data" :key="loan.id">
-                            <td>LOAN0{{loan.id}}</td>
-                            <td>{{loan.customer.name}}</td>
-                            <td class="text-right">{{loan.pretty_amount}} LKR</td>
-                            <td class="text-right">{{loan.duration}} Months</td>
-                            <td class="text-right"><a :href="'/loans/download/'+loan.id">Download</a></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="data-showcase">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Loan Number</th>
+                                <th>Customer Name</th>
+                                <th class="text-right">Loan Amount</th>
+                                <th class="text-right">Loan Duration</th>
+                                <th class="text-right">Bank File</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="loan in loans.data" :key="loan.id">
+                                <td>LOAN0{{loan.id}}</td>
+                                <td>{{loan.customer.name}}</td>
+                                <td class="text-right">{{loan.pretty_amount}} LKR</td>
+                                <td class="text-right">{{loan.duration}} Months</td>
+                                <td class="text-right"><a :href="'/loans/download/'+loan.id">Download</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <pagination class="float-right" :data="loans" @pagination-change-page="getLoans"></pagination>
             </div>
         </div>
