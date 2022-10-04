@@ -8,6 +8,7 @@ class Loan extends Model
 {
     protected $fillable = ['amount', 'duration', 'created_by', 'bank_file'];
     public $appends = ['pretty_amount'];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function customer()
     {

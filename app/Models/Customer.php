@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     protected $appends = ['total_due'];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function loans()
     {
