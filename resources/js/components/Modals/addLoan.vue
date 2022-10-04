@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group">
                         <label>Bank File</label>
-                        <input type="file" id="files" ref="bankFile" v-on:change="selectUploadedFile()" />
+                        <input type="file" id="files" ref="bankFile" accept=".txt,.pdf,.csv" v-on:change="selectUploadedFile()" />
                         <p v-if="addLoanErrors.bankFile != null" class="text-danger">{{addLoanErrors.bankFile[0]}}</p>
                     </div>
                 </div>
