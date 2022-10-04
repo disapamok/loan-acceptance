@@ -83,7 +83,7 @@
                         href="mailto:hi@disapamok.com">hi@disapamok.com</a> to get your own API key.
                 </p>
 
-                <h4>HEADERS <span style="color: red">THESE HEADERS MUST PARSED IN EACH API CALL</span></h4>
+                <h4>HEADERS <span style="color: red">THESE HEADERS MUST BE PARSED IN EACH API CALL</span></h4>
                 <table>
                     <thead>
                         <tr>
