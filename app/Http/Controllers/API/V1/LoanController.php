@@ -34,9 +34,7 @@ class LoanController extends APIResponse
         ]);
 
         if (!$validator->passes())
-            return $this->fail([
-                'errors' => $validator->errors()
-            ], 'Entered form data is not valid.');
+            return $this->fail($validator->errors(), 'Entered form data is not valid.');
 
         // The request is validated.
         $file = $request->file('bankFile');
