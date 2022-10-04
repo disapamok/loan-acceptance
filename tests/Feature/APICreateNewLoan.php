@@ -9,11 +9,6 @@ use Illuminate\Support\Str;
 
 class APICreateNewLoan extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_create_new_loan_without_form_data()
     {
         $response = $this->withHeaders([
