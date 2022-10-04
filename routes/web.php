@@ -14,6 +14,7 @@ Route::get('/', function () {
 * API Documentation
 */
 Route::get('api-documentation', [DocumentationController::class, 'documentation'])->name('home.documentation');
+Route::get('testing', [DocumentationController::class, 'testingIntro'])->name('home.testing');
 
 Route::group(['prefix' => 'loans', 'middleware' => 'auth', 'as' => 'loan.'], function () {
     Route::get('/', [LoanController::class, 'index'])->name('index');

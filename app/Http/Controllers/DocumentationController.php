@@ -10,4 +10,9 @@ class DocumentationController extends Controller
     {
         return view('documentation.index');
     }
+
+    public function testingIntro()
+    {
+        return view('testing.index');
+    }
 }

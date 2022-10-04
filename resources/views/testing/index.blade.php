@@ -5,10 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Welcome | {{ env('APP_NAME') }}</title>
+    <title>Test | {{ env('APP_NAME') }}</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Styles -->
     <style>
@@ -67,20 +69,20 @@
 </head>
 
 <body>
-    <div class="flex-center position-ref full-height">
-        <div class="content">
-            <div class="title m-b-md">
-                Welcome!
-            </div>
-            <div class="links">
-                <a href="{{ route('loan.index') }}">Browse Application</a>
-                <a href="{{ route('home.documentation') }}">API Documentation</a>
-                <a href="https://www.getpostman.com/collections/be606f9c324b66c438b0" target="_blank">Postman
-                    Endpoints</a>
-                <a href="{{ route('home.testing') }}">Testing Instructions</a>
+    <main class="py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Testing - {{ env('APP_NAME') }}</h1>
+                    <p>This application tests have been devided to two tests as,</p>
+                    <ol>
+                        <li><strong>Unit Tests</strong></li>
+                        <li><strong>Feature Tests</strong></li>
+                    </ol>
+                    <br>
+                    <h4>Unit Tests</h4>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 </body>
-
-</html>
