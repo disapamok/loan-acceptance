@@ -29,14 +29,14 @@ class VerifyAPI
             } else {
                 return response()->json([
                     'error' => true,
-                    'code' => 401,
+                    'code' => 'X001',
                     'message' => 'Authentication failed. Your Bearer token is invalid.'
                 ]);
             }
         } else {
             return response()->json([
                 'error' => true,
-                'code' => 401,
+                'code' => 'X001',
                 'message' => 'Authentication failed. Bearer token does not exist.'
             ]);
         }

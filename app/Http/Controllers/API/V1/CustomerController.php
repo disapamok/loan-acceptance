@@ -20,7 +20,8 @@ class CustomerController extends APIResponse
     public function add(Request $request)
     {
         $validator = validator()->make($request->all(), [
-            'customer_name' => 'required|unique:customers,name'
+            'customer_name' => 'required|unique:customers,name',
+            'email' => 'email'
         ]);
 
         if (!$validator->passes())
@@ -28,6 +29,8 @@ class CustomerController extends APIResponse
 
         $customer = new Customer();
         $customer->name = $request->customer_name;
+        $customer->email = $request->email;
+        $customer->phone_number = $request->phone_number;
         $customer->save();
 
         return $this->success([

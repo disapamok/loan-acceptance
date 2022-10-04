@@ -57,10 +57,10 @@
             </div>
             <ul>
                 <li class="scroll-to-link active" data-target="content-get-started">
-                    <a>GET STARTED</a>
+                    <a>Get Started</a>
                 </li>
                 <li class="scroll-to-link" data-target="content-get-characters">
-                    <a>Get Characters</a>
+                    <a>API Endpoints</a>
                 </li>
                 <li class="scroll-to-link" data-target="content-errors">
                     <a>Errors</a>
@@ -76,21 +76,59 @@
                 <h1>Get started</h1>
                 <p>
                     The API provides programmatic access to read loan and customer data. Retrieve loan payment schedule
-                    and record data.
+                    and record data accordingly.
                 </p>
                 <p>
                     To use this API, you need an <strong>API key</strong>. Please contact us at <a
                         href="mailto:hi@disapamok.com">hi@disapamok.com</a> to get your own API key.
                 </p>
+
+                <h4>HEADERS <span style="color: red">THESE HEADERS MUST PARSED IN EACH API CALL</span></h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Key</th>
+                            <th>Value</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Accept</td>
+                            <td>application/json</td>
+                            <td>(required) Request should accept json response.</td>
+                        </tr>
+                        <tr>
+                            <td>Bearer</td>
+                            <td><strong>{API key}</strong></td>
+                            <td>(required) The Key you received to communicate.</td>
+                        </tr>
+
+                    </tbody>
+                </table>
             </div>
+            <!-- Loans -->
             <div class="overflow-hidden content-section" id="content-get-characters">
                 <h2>get loans</h2>
                 <p>
                     To get loan data you need to make a POST call to the following url :<br>
-                    <code class="higlighted break-word">http://loan.disapamok.com/api/loans/fetch</code>
+                    <span class="method-post">POST</span>
+                    <code class="higlighted break-word">{{ route('api.v1.loans.index') }}</code>
+                </p>
+            </div>
+            <!-- End Loans -->
+
+            <!-- Add New Loan -->
+            <div class="overflow-hidden content-section" id="content-get-characters">
+                <h2>add new loan</h2>
+                <p>
+                    To add new loan you need to make a POST call to following URL with form data : <strong>This request
+                        Content-Type should be multipart/form-data</strong><br>
+                    <span class="method-post">POST</span>
+                    <code class="higlighted break-word">{{ route('api.v1.loans.add') }}</code>
                 </p>
                 <br>
-                <h4>QUERY PARAMETERS</h4>
+                <h4>FORM DATA</h4>
                 <table>
                     <thead>
                         <tr>
@@ -101,55 +139,116 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>secret_key</td>
+                            <td>customer_name</td>
                             <td>String</td>
-                            <td>Your API key.</td>
+                            <td>(required) Customer name.</td>
                         </tr>
                         <tr>
-                            <td>search</td>
-                            <td>String</td>
-                            <td>(optional) A search word to find character by name.</td>
-                        </tr>
-                        <tr>
-                            <td>house</td>
-                            <td>String</td>
-                            <td>
-                                (optional) a string array of houses:
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>alive</td>
-                            <td>Boolean</td>
-                            <td>
-                                (optional) a boolean to filter alived characters
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>gender</td>
-                            <td>String</td>
-                            <td>
-                                (optional) a string to filter character by gender:<br> m: male<br> f: female
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>offset</td>
+                            <td>duration</td>
                             <td>Integer</td>
-                            <td>(optional - default: 0) A cursor for use in pagination. Pagination starts offset the
-                                specified offset.</td>
+                            <td>(required) The duration of the loan.</td>
                         </tr>
                         <tr>
-                            <td>limit</td>
-                            <td>Integer</td>
-                            <td>(optional - default: 10) A limit on the number of objects to be returned, between 1 and
-                                100.</td>
+                            <td>amount</td>
+                            <td>Double</td>
+                            <td>
+                                (required) The amount of the loan.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>bankFile</td>
+                            <td>File</td>
+                            <td>
+                                (required) This file should be .txt, .csv or .pdf in format.
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+            <!-- End add new loan -->
+
+            <!-- Get Loan -->
+            <div class="overflow-hidden content-section" id="content-get-characters">
+                <h2>get loan data</h2>
+                <p>
+                    To get data of particular loan, you need to make a POST call to the following url with the id of
+                    the loan :<br>
+                    <span class="method-post">POST</span>
+                    <code class="higlighted break-word">{{ env('APP_URL') }}api/v1/loan/get/{LoanID}</code>
+                </p>
+            </div>
+            <!-- End Get Loan -->
+
+            <!-- Customers -->
+            <div class="overflow-hidden content-section" id="content-get-characters">
+                <h2>get customers</h2>
+                <p>
+                    To get customer data you need to make a POST call to the following url :<br>
+                    <span class="method-post">POST</span>
+                    <code class="higlighted break-word">{{ route('api.v1.customer.index') }}</code>
+                </p>
+            </div>
+            <!-- End Customers -->
+
+            <!-- Add New Customer -->
+            <div class="overflow-hidden content-section" id="content-get-characters">
+                <h2>add new customer</h2>
+                <p>
+                    To add new customer you need to make a POST call to following URL with form data :<br>
+                    <span class="method-post">POST</span>
+                    <code class="higlighted break-word">{{ route('api.v1.customer.add') }}</code>
+                </p>
+                <br>
+                <h4>FORM DATA</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>customer_name</td>
+                            <td>String</td>
+                            <td>(required) Customer name.</td>
+                        </tr>
+                        <tr>
+                            <td>email</td>
+                            <td>String</td>
+                            <td>(optional) The email of the customer.</td>
+                        </tr>
+                        <tr>
+                            <td>phone_number</td>
+                            <td>String</td>
+                            <td>
+                                (option) The phone number of the customer.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- End add new customer -->
+
+            <!-- Get Customer -->
+            <div class="overflow-hidden content-section" id="content-get-characters">
+                <h2>get customer data</h2>
+                <p>
+                    To get data of particular customer with loan data, you need to make a POST call to the following url
+                    with the id of the loan :<br>
+                    <span class="method-post">POST</span>
+                    <code class="higlighted break-word">{{ env('APP_URL') }}api/v1/customer/get/{CustomerID}</code>
+                </p>
+            </div>
+            <!-- End Get Customer -->
+
+
+
             <div class="overflow-hidden content-section" id="content-errors">
                 <h2>Errors</h2>
                 <p>
-                    The Westeros API uses the following error codes:
+                    The API uses the following error codes:
                 </p>
                 <table>
                     <thead>
@@ -169,24 +268,8 @@
                         <tr>
                             <td>X001</td>
                             <td>
-                                Unknown or unvalid <code class="higlighted">secret_key</code>. This error appears if you
+                                Unknown or unvalid <code class="higlighted">api_key</code>. This error appears if you
                                 use an unknow API key or if your API key expired.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>X002</td>
-                            <td>
-                                Unvalid <code class="higlighted">secret_key</code> for this domain. This error appears
-                                if you use an API key non specified for your domain. Developper or Universal API keys
-                                doesn't have domain checker.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>X003</td>
-                            <td>
-                                Unknown or unvalid user <code class="higlighted">token</code>. This error appears if you
-                                use an unknow user <code class="higlighted">token</code> or if the user <code
-                                    class="higlighted">token</code> expired.
                             </td>
                         </tr>
                     </tbody>

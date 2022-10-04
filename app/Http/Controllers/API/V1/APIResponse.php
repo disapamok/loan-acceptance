@@ -12,16 +12,18 @@ class APIResponse extends Controller
         return response()->json([
             'success' => true,
             'data' => $data,
-            'message' => $message
+            'message' => $message,
+            'code' => 0
         ]);
     }
 
-    public function fail($data = [], $message = null)
+    public function fail($data = [], $message = null, $code = 'X000')
     {
         return response()->json([
             'success' => false,
+            'code' => $code,
             'errors' => $data,
-            'message' => $message
+            'message' => $message,
         ]);
     }
 }

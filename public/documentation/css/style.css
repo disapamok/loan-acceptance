@@ -524,3 +524,10 @@ body.one-content-column-version .content thead {
 .cf:before, .cf:after { content: ""; display: block; }
 .cf:after { clear: both; }
 .ie6 .cf { zoom: 1 }
+.method-post{
+    background-color: #eea200;
+    color: #fff;
+    padding: 4px 7px;
+    border-radius: 5px;
+    font-size: 13px;
+}
