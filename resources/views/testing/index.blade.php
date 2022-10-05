@@ -81,6 +81,38 @@
                     </ol>
                     <br>
                     <h4>Unit Tests</h4>
+                    <p>Please execute this artisan command in your terminal in the project root directory.</p>
+                    <code style="font-size: 16px;">
+                        php artisan test
+                    </code>
+                    or
+                    <code style="font-size: 16px;">
+                        ./vendor/bin/phpunit
+                    </code>
+                    <br>
+
+                    <br>
+                    <h4>Feature Tests</h4>
+                    <p>You can run the feature tests according to the class with following command.</p>
+                    <code style="font-size: 16px;">
+                        vendor/bin/phpunit tests/Feature/APIRetrieveCustomer.php
+                    </code>
+                    <strong>Or, Run all feature tests</strong>
+                    <code style="font-size: 16px;">
+                        vendor/bin/phpunit tests/Feature/*
+                    </code>
+
+                    <br>
+                    <br>
+                    <h3>Available feature test classes</h3>
+                    <ul>
+                        <li>APICreateNewLoan.php</li>
+                        <li>APIRetrieveCustomer.php</li>
+                        <li>APIRetrieveLoan.php</li>
+                    </ul>
+                    <br><br>
+                    <!-- ./vendor/bin/phpunit -c phpunit.xml --migrate-configuration -->
+                    <a class="btn btn-sm btn-primary" href="/">Go Home</a>
                 </div>
             </div>
         </div>
