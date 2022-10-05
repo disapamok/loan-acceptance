@@ -23,25 +23,28 @@
                             </div>
                         </div>
                     </div>
-                    <h6><b>Ongoing Loans</b></h6>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Loan Number</th>
-                                <th class="text-right">Loan Amount</th>
-                                <th class="text-right">Loan Duration</th>
-                                <th class="text-right">Bank File</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="loan in customerData.loans" :key="loan.id">
-                                <td>LOAN0{{loan.id}}</td>
-                                <td class="text-right">{{loan.pretty_amount}} LKR</td>
-                                <td class="text-right">{{loan.duration}} Months</td>
-                                <td class="text-right"><a :href="'/loans/download/'+loan.id">Download</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                    <div v-if="loading == true && customerData.loans.length > 0">
+                        <h6><b>Ongoing Loans</b></h6>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Loan Number</th>
+                                    <th class="text-right">Loan Amount</th>
+                                    <th class="text-right">Loan Duration</th>
+                                    <th class="text-right">Bank File</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="loan in customerData.loans" :key="loan.id">
+                                    <td>LOAN0{{loan.id}}</td>
+                                    <td class="text-right">{{loan.pretty_amount}} LKR</td>
+                                    <td class="text-right">{{loan.duration}} Months</td>
+                                    <td class="text-right"><a :href="'/loans/download/'+loan.id">Download</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <div v-for="loan in customerData.loans" :key="'schedule'+loan.id">
                         <h6><b>Re-payment schedule for: LOAN0{{loan.id}} </b></h6>
@@ -61,6 +64,10 @@
                         </table>
 
                     </div>
+
+                    <div v-if="loading == true && customerData.loans.length == 0">
+                        <p class="text-center">There is no ongoing loan for this customer.</p>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -74,13 +81,15 @@
 export default {
     data() {
         return {
-            customerData : []
+            customerData : [],
+            loading : false
         }
     },
     methods : {
         modelOpened : function (customerID){
             axios.get('/customers/get/'+customerID).then(response => {
                 this.customerData = response.data.data.customer;
+                this.loading = true;
             }).catch(function (){
                 alert('Something went wrong');
             });

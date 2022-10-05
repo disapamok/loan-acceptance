@@ -21,6 +21,9 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <tr v-if="loading">
+                                <td colspan="5" class="text-center">Loading...</td>
+                            </tr>
                             <tr v-for="loan in loans.data" :key="loan.id">
                                 <td>LOAN0{{loan.id}}</td>
                                 <td>{{loan.customer.name}}</td>
@@ -46,7 +49,8 @@
         },
         data(){
             return {
-                loans : {}
+                loans : {},
+                loading : true
             }
         },
         mounted() {
@@ -54,8 +58,10 @@
         },
         methods : {
             getLoans : function (page = 1){
+                this.loading = true;
                 axios.post('/loans/fetch?page=' + page).then(response => {
                     this.loans = response.data.data.loans;
+                    this.loading = false;
                 }).catch(function (){
                     alert('error');
                 });

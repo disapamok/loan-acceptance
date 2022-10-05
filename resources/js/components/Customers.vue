@@ -18,6 +18,9 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <tr v-if="loading">
+                                <td colspan="3" class="text-center">Loading...</td>
+                            </tr>
                             <tr v-for="customer in customers.data" :key="customer.id">
                                 <td>{{customer.name}}</td>
                                 <td class="text-right">{{customer.total_due}} LKR</td>
@@ -44,7 +47,8 @@
         },
         data(){
             return {
-                customers : {}
+                customers : {},
+                loading: true
             }
         },
         mounted() {
@@ -52,8 +56,10 @@
         },
         methods : {
             getCustomers : function (page = 1){
+                this.loading = true;
                 axios.post('/customers/fetch?page='+page).then(response => {
                     this.customers = response.data.data.customers;
+                    this.loading = false;
                 }).catch(function (){
                     alert('error');
                 });
