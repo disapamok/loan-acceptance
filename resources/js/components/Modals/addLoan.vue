@@ -72,7 +72,7 @@ export default {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then((response) => {
-                //this.showAlert(response.data.message);
+                this.showAlert(response.data.message);
                 $('#addLoan').modal('hide');
                 this.$emit('loanAdded',response.data.data.theLoan);
             }).catch((error) => {
